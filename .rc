@@ -1,0 +1,11 @@
+function npm() {
+    DOCKER_IMAGE=node
+    DOCKER_RUN_OPTS="--rm -it -v ${PWD}:${PWD} -w ${PWD} -e npm_config_cache=${PWD}/.npm -e npm_config_prefix=${PWD}"
+    docker run ${=DOCKER_RUN_OPTS} --entrypoint=npm ${DOCKER_IMAGE} "$@"
+}
+
+function npx() {
+    DOCKER_IMAGE=node
+    DOCKER_RUN_OPTS="--rm -it -v ${PWD}:${PWD} -w ${PWD} -e npm_config_cache=${PWD}/.npm -e npm_config_prefix=${PWD}"
+    docker run ${=DOCKER_RUN_OPTS} --entrypoint=npx ${DOCKER_IMAGE} "$@"
+}
