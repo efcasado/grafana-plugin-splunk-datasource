@@ -25,7 +25,7 @@ export class DataSource extends DataSourceApi<MyQuery, MyDataSourceOptions> {
 
   async query(options: DataQueryRequest<MyQuery>): Promise<DataQueryResponse> {
     const promises = options.targets.map((query) =>
-      this.doRequest(query).then((response) => {
+      this.doRequest(query, options).then((response) => {
         const frame = new MutableDataFrame({
           refId: query.refId,
           fields: [],
@@ -60,13 +60,19 @@ export class DataSource extends DataSourceApi<MyQuery, MyDataSourceOptions> {
     };
   }
 
-  async doRequest(query: MyQuery) {
+  async doRequest(query: MyQuery, options: DataQueryRequest<MyQuery>) {
     // https://docs.splunk.com/Documentation/Splunk/8.2.6/Admin/Limitsconf#.5Brestapi.5D
     // oneshot requests are limited to 100 results
+    const { range } = options;
+    const from = Math.floor(range!.from.valueOf() / 1000); // UNIX time in seconds
+    const to = Math.floor(range!.to.valueOf() / 1000); // UNIX time in seconds
+
     const data = new URLSearchParams({
       search: `search ${query.queryText}`,
       output_mode: 'json',
       exec_mode: 'oneshot',
+      earliest_time: from.toString(),
+      latest_time: to.toString()
     }).toString();
 
     console.log(`DEBUG: data=${data}`);
