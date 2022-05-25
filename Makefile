@@ -1,9 +1,17 @@
-.PHONY: all build up down
+.PHONY: all build build-docker build-splunk-datasource up down
 
-all:
+SHELL = BASH_ENV=.rc /bin/bash --noprofile
 
-build:
+all: build up
+
+build: | build-docker build-splunk-datasource
+
+build-docker:
 	docker build . -t node
+
+build-splunk-datasource:
+	cd plugins/splunk-datasource; yarn install
+	cd plugins/splunk-datasource; yarn dev
 
 up:
 	docker-compose up -d

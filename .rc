@@ -1,11 +1,30 @@
 function npm() {
     DOCKER_IMAGE=node
     DOCKER_RUN_OPTS="--rm -it -v ${PWD}:${PWD} -w ${PWD} -e npm_config_cache=${PWD}/.npm -e npm_config_prefix=${PWD}"
-    docker run ${=DOCKER_RUN_OPTS} --entrypoint=npm ${DOCKER_IMAGE} "$@"
+    if [ -n "$ZSH_VERSION" ]; then
+        docker run ${=DOCKER_RUN_OPTS} --entrypoint=npm ${DOCKER_IMAGE} "$@"
+    else
+        docker run ${DOCKER_RUN_OPTS} --entrypoint=npm ${DOCKER_IMAGE} "$@"
+    fi
 }
 
 function npx() {
     DOCKER_IMAGE=node
     DOCKER_RUN_OPTS="--rm -it -v ${PWD}:${PWD} -w ${PWD} -e npm_config_cache=${PWD}/.npm -e npm_config_prefix=${PWD}"
-    docker run ${=DOCKER_RUN_OPTS} --entrypoint=npx ${DOCKER_IMAGE} "$@"
+
+    if [ -n "$ZSH_VERSION" ]; then
+        docker run ${=DOCKER_RUN_OPTS} --entrypoint=npx ${DOCKER_IMAGE} "$@"
+    else
+        docker run ${DOCKER_RUN_OPTS} --entrypoint=npx ${DOCKER_IMAGE} "$@"
+    fi
+}
+
+function yarn() {
+    DOCKER_IMAGE=node
+    DOCKER_RUN_OPTS="--rm -it -v ${PWD}:${PWD} -w ${PWD} -e NODE_OPTIONS=--openssl-legacy-provider -e npm_config_cache=${PWD}/.npm -e npm_config_prefix=${PWD}"
+    if [ -n "$ZSH_VERSION" ]; then
+        docker run ${=DOCKER_RUN_OPTS} --entrypoint=yarn ${DOCKER_IMAGE} "$@"
+    else
+        docker run ${DOCKER_RUN_OPTS} --entrypoint=yarn ${DOCKER_IMAGE} "$@"
+    fi
 }

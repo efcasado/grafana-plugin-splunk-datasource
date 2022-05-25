@@ -2,13 +2,23 @@ version: '3.7'
 services:
   grafana:
     image: grafana/grafana:7.5.16
+    environment:
+      - GF_AUTH_BASIC_ENABLED=false
+      - GF_AUTH_ANONYMOUS_ENABLED=true
+      - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_PLUGINS_ALLOW_LOADING_UNSIGNED_PLUGINS=efcasado-splunk-datasource
     ports:
       - 3000:3000
     volumes:
-      - ./splunk-datasource:/var/lib/grafana/plugins/splunk-datasource
+      - ./plugins:/var/lib/grafana/plugins
+      - ./provisioning:/var/lib/grafana/provisioning
 
   splunk:
     image: splunk/splunk:8.2.6
     environment:
       - SPLUNK_START_ARGS=--accept-license
-      - SPLUNK_PASSWORD=splunk/splunk
+      - SPLUNK_PASSWORD=thisisasecret
+    ports:
+      - 8000:8000
+      - 8089:8089

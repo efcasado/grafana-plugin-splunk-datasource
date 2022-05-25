@@ -14,11 +14,13 @@
   "license": "Apache-2.0",
   "devDependencies": {
     "@grafana/data": "latest",
+    "@grafana/runtime": "latest",
     "@grafana/toolkit": "latest",
     "@grafana/ui": "latest",
     "@types/lodash": "latest",
     "@testing-library/jest-dom": "5.4.0",
-    "@testing-library/react": "^10.0.2"
+    "@testing-library/react": "^10.0.2",
+    "axios": "0.27.2"
   },
   "engines": {
     "node": ">=14"
