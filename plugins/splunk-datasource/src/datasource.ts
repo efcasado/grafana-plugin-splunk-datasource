@@ -53,11 +53,38 @@ export class DataSource extends DataSourceApi<MyQuery, MyDataSourceOptions> {
   }
 
   async testDatasource() {
-    // Implement a health check for your data source.
-    return {
-      status: 'success',
-      message: 'Success',
-    };
+    const data = new URLSearchParams({
+      search: `search index=_internal * | stats count`,
+      output_mode: 'json',
+      exec_mode: 'oneshot',
+    }).toString();
+    const routePath = '/splunk-datasource';
+
+    return getBackendSrv()
+      .datasourceRequest({
+        method: 'POST',
+        url: this.url + routePath + '/services/search/jobs',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        data: data,
+      })
+      .then(
+        (response: any) => {
+          return {
+            status: 'success',
+            message: 'Data source is working',
+            title: 'Success',
+          };
+        },
+        (err: any) => {
+          return {
+            status: 'error',
+            message: err.statusText,
+            title: 'Error',
+          };
+        }
+      );
   }
 
   async doRequest(query: MyQuery, options: DataQueryRequest<MyQuery>) {
@@ -72,7 +99,7 @@ export class DataSource extends DataSourceApi<MyQuery, MyDataSourceOptions> {
       output_mode: 'json',
       exec_mode: 'oneshot',
       earliest_time: from.toString(),
-      latest_time: to.toString()
+      latest_time: to.toString(),
     }).toString();
 
     console.log(`DEBUG: data=${data}`);
@@ -95,7 +122,6 @@ export class DataSource extends DataSourceApi<MyQuery, MyDataSourceOptions> {
     // crossOriginSharingHeaders = *
     // in Splunk:
     // enableSplunkdSSL = false
-
 
     return result;
   }
