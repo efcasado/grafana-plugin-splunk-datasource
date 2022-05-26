@@ -1,19 +1,17 @@
 import defaults from 'lodash/defaults';
 
-import React, { ChangeEvent, PureComponent } from 'react';
-import { LegacyForms } from '@grafana/ui';
+import React, { PureComponent } from 'react';
+import { QueryField } from '@grafana/ui';
 import { QueryEditorProps } from '@grafana/data';
 import { DataSource } from './datasource';
 import { defaultQuery, MyDataSourceOptions, MyQuery } from './types';
 
-const { FormField } = LegacyForms;
-
 type Props = QueryEditorProps<DataSource, MyQuery, MyDataSourceOptions>;
 
 export class QueryEditor extends PureComponent<Props> {
-  onQueryTextChange = (event: ChangeEvent<HTMLInputElement>) => {
+  onQueryTextChange = (value: string) => {
     const { onChange, query } = this.props;
-    onChange({ ...query, queryText: event.target.value });
+    onChange({ ...query, queryText: value });
   };
 
   render() {
@@ -22,13 +20,7 @@ export class QueryEditor extends PureComponent<Props> {
 
     return (
       <div className="gf-form">
-        <FormField
-          labelWidth={6}
-          inputWidth={12}
-          value={queryText || ''}
-          onChange={this.onQueryTextChange}
-          label="Splunk Query"
-        />
+        <QueryField portalOrigin="splunk" query={queryText || ''} onChange={this.onQueryTextChange} />
       </div>
     );
   }
