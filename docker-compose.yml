@@ -12,7 +12,7 @@ services:
       - 3000:3000
     volumes:
       - ./:/var/lib/grafana/plugins/efcasado-splunk-datasource
-      - ./provisioning:/var/lib/grafana/provisioning
+      - ./provisioning/datasources/splunk-datasource.yml:/etc/grafana/provisioning/datasources/splunk-datasource.yml
 
   splunk:
     image: splunk/splunk:8.2.6
