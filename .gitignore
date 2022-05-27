@@ -1,4 +1,7 @@
-*~
+.cache/
 .npm/
+node_modules/
+*~
 \#*
 .\#*
+yarn-error.log
