@@ -15,6 +15,8 @@ build-splunk-datasource:
 
 up:
 	docker-compose up -d
+	sleep 60
+	$(MAKE) configure
 
 configure: | configure-splunk
 
