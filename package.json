@@ -1,6 +1,6 @@
 {
   "name": "efcasado-splunk-datasource",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "",
   "scripts": {
     "build": "grafana-toolkit plugin:build",
