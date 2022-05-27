@@ -12,8 +12,6 @@ it is a Grafana plugin that allows you to query Splunk directly from Grafana.
 
 ## Installation
 
-https://github.com/elixir-lang/elixir/releases/download/v1.13.4/Precompiled.zip
-
 ```
 wget https://github.com/efcasado/grafana-plugin-splunk-datasource/releases/download/vX.Y.Z/(...).zip
 unzip efcasado-splunk-datasource-X.Y.Z.zip -d YOUR_PLUGIN_DIR/efcasado-splunk-datasource
