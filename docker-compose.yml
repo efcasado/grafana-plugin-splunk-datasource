@@ -11,7 +11,7 @@ services:
     ports:
       - 3000:3000
     volumes:
-      - ./plugins:/var/lib/grafana/plugins
+      - ./:/var/lib/grafana/plugins/efcasado-splunk-datasource
       - ./provisioning:/var/lib/grafana/provisioning
 
   splunk:
