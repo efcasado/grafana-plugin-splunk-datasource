@@ -1,12 +1,11 @@
-import React, { ChangeEvent, PureComponent } from "react";
-import { LegacyForms } from "@grafana/ui";
-import { DataSourcePluginOptionsEditorProps } from "@grafana/data";
-import { MyDataSourceOptions, MySecureJsonData } from "./types";
+import React, { ChangeEvent, PureComponent } from 'react';
+import { LegacyForms } from '@grafana/ui';
+import { DataSourcePluginOptionsEditorProps } from '@grafana/data';
+import { MyDataSourceOptions, MySecureJsonData } from './types';
 
 const { SecretFormField, FormField } = LegacyForms;
 
-interface Props
-  extends DataSourcePluginOptionsEditorProps<MyDataSourceOptions> {}
+interface Props extends DataSourcePluginOptionsEditorProps<MyDataSourceOptions> {}
 
 interface State {}
 
@@ -59,7 +58,7 @@ export class ConfigEditor extends PureComponent<Props, State> {
       },
       secureJsonData: {
         ...options.secureJsonData,
-        username: "",
+        username: '',
       },
     });
   };
@@ -85,7 +84,7 @@ export class ConfigEditor extends PureComponent<Props, State> {
       },
       secureJsonData: {
         ...options.secureJsonData,
-        password: "",
+        password: '',
       },
     });
   };
@@ -111,7 +110,7 @@ export class ConfigEditor extends PureComponent<Props, State> {
       },
       secureJsonData: {
         ...options.secureJsonData,
-        token: "",
+        token: '',
       },
     });
   };
@@ -129,7 +128,7 @@ export class ConfigEditor extends PureComponent<Props, State> {
             labelWidth={6}
             inputWidth={20}
             onChange={this.onProtocolChange}
-            value={jsonData.protocol || ""}
+            value={jsonData.protocol || ''}
             placeholder="<protocol>"
           />
         </div>
@@ -140,7 +139,7 @@ export class ConfigEditor extends PureComponent<Props, State> {
             labelWidth={6}
             inputWidth={20}
             onChange={this.onEndpointChange}
-            value={jsonData.endpoint || ""}
+            value={jsonData.endpoint || ''}
             placeholder="<endpoint>"
           />
         </div>
@@ -151,7 +150,7 @@ export class ConfigEditor extends PureComponent<Props, State> {
             labelWidth={6}
             inputWidth={20}
             onChange={this.onPortChange}
-            value={jsonData.port || ""}
+            value={jsonData.port || ''}
             placeholder="<port>"
           />
         </div>
@@ -159,10 +158,8 @@ export class ConfigEditor extends PureComponent<Props, State> {
         <div className="gf-form-inline">
           <div className="gf-form">
             <SecretFormField
-              isConfigured={
-                (secureJsonFields && secureJsonFields.username) as boolean
-              }
-              value={secureJsonData.username || ""}
+              isConfigured={(secureJsonFields && secureJsonFields.username) as boolean}
+              value={secureJsonData.username || ''}
               label="Username"
               placeholder="<username>"
               labelWidth={6}
@@ -176,10 +173,8 @@ export class ConfigEditor extends PureComponent<Props, State> {
         <div className="gf-form-inline">
           <div className="gf-form">
             <SecretFormField
-              isConfigured={
-                (secureJsonFields && secureJsonFields.password) as boolean
-              }
-              value={secureJsonData.password || ""}
+              isConfigured={(secureJsonFields && secureJsonFields.password) as boolean}
+              value={secureJsonData.password || ''}
               label="Password"
               placeholder="<password>"
               labelWidth={6}
@@ -193,10 +188,8 @@ export class ConfigEditor extends PureComponent<Props, State> {
         <div className="gf-form-inline">
           <div className="gf-form">
             <SecretFormField
-              isConfigured={
-                (secureJsonFields && secureJsonFields.token) as boolean
-              }
-              value={secureJsonData.token || ""}
+              isConfigured={(secureJsonFields && secureJsonFields.token) as boolean}
+              value={secureJsonData.token || ''}
               label="Token"
               placeholder="<token>"
               labelWidth={6}

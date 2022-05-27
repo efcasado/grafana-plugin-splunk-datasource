@@ -1,4 +1,4 @@
-import { getBackendSrv } from "@grafana/runtime";
+import { getBackendSrv } from '@grafana/runtime';
 
 import {
   DataQueryRequest,
@@ -6,16 +6,14 @@ import {
   DataSourceApi,
   DataSourceInstanceSettings,
   MutableDataFrame,
-} from "@grafana/data";
+} from '@grafana/data';
 
-import { MyQuery, MyDataSourceOptions } from "./types";
+import { MyQuery, MyDataSourceOptions } from './types';
 
 export class DataSource extends DataSourceApi<MyQuery, MyDataSourceOptions> {
   url?: string;
 
-  constructor(
-    instanceSettings: DataSourceInstanceSettings<MyDataSourceOptions>
-  ) {
+  constructor(instanceSettings: DataSourceInstanceSettings<MyDataSourceOptions>) {
     super(instanceSettings);
 
     this.url = instanceSettings.url;
@@ -57,76 +55,76 @@ export class DataSource extends DataSourceApi<MyQuery, MyDataSourceOptions> {
   async testDatasource() {
     const data = new URLSearchParams({
       search: `search index=_internal * | stats count`,
-      output_mode: "json",
-      exec_mode: "oneshot",
+      output_mode: 'json',
+      exec_mode: 'oneshot',
     }).toString();
-    const routePath = "/splunk-datasource";
+    const routePath = '/splunk-datasource';
 
     return getBackendSrv()
       .datasourceRequest({
-        method: "POST",
-        url: this.url + routePath + "/services/search/jobs",
+        method: 'POST',
+        url: this.url + routePath + '/services/search/jobs',
         headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
+          'Content-Type': 'application/x-www-form-urlencoded',
         },
         data: data,
       })
       .then(
         (response: any) => {
           return {
-            status: "success",
-            message: "Data source is working",
-            title: "Success",
+            status: 'success',
+            message: 'Data source is working',
+            title: 'Success',
           };
         },
         (err: any) => {
           return {
-            status: "error",
+            status: 'error',
             message: err.statusText,
-            title: "Error",
+            title: 'Error',
           };
         }
       );
   }
 
   async doSearchStatusRequest(sid: string) {
-    const routePath = "/splunk-datasource";
+    const routePath = '/splunk-datasource';
     const result: boolean = await getBackendSrv()
       .datasourceRequest({
-        method: "GET",
-        url: this.url + routePath + "/services/search/jobs/" + sid,
+        method: 'GET',
+        url: this.url + routePath + '/services/search/jobs/' + sid,
         params: {
-          output_mode: "json",
+          output_mode: 'json',
         },
       })
       .then((response) => {
         let status = response.data.entry[0].content.dispatchState;
         // console.log(`DEBUG: dispatchState=${status}`);
-        return status === "DONE" || status === "PAUSED" || status === "FAILED";
+        return status === 'DONE' || status === 'PAUSED' || status === 'FAILED';
       });
 
     return result;
   }
 
   async doSearchRequest(query: MyQuery, options: DataQueryRequest<MyQuery>) {
-    const routePath = "/splunk-datasource";
+    const routePath = '/splunk-datasource';
     const { range } = options;
     const from = Math.floor(range!.from.valueOf() / 1000);
     const to = Math.floor(range!.to.valueOf() / 1000);
 
     const data = new URLSearchParams({
       search: `search ${query.queryText}`,
-      output_mode: "json",
+      output_mode: 'json',
       earliest_time: from.toString(),
       latest_time: to.toString(),
     }).toString();
 
     const sid: string = await getBackendSrv()
       .datasourceRequest({
-        method: "POST",
-        url: this.url + routePath + "/services/search/jobs",
+        method: 'POST',
+        url: this.url + routePath + '/services/search/jobs',
         headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
+          'Content-Type': 'application/x-www-form-urlencoded',
         },
         data: data,
       })
@@ -146,29 +144,25 @@ export class DataSource extends DataSourceApi<MyQuery, MyDataSourceOptions> {
     let results: any[] = [];
 
     while (!isFinished) {
-      const routePath = "/splunk-datasource";
+      const routePath = '/splunk-datasource';
       await getBackendSrv()
         .datasourceRequest({
-          method: "GET",
-          url:
-            this.url + routePath + "/services/search/jobs/" + sid + "/results",
+          method: 'GET',
+          url: this.url + routePath + '/services/search/jobs/' + sid + '/results',
           params: {
-            output_mode: "json",
+            output_mode: 'json',
             offset: offset,
             count: count,
           },
         })
         .then((response) => {
           // console.log(`DEBUG: count=${count} offset=${offset} ${JSON.stringify(response.data)}`);
-          if (
-            response.data.post_process_count === 0 &&
-            response.data.results.length === 0
-          ) {
+          if (response.data.post_process_count === 0 && response.data.results.length === 0) {
             isFinished = true;
           } else {
             if (isFirst) {
               isFirst = false;
-              fields = response.data.fields.map((field: any) => field["name"]);
+              fields = response.data.fields.map((field: any) => field['name']);
             }
             offset = offset + count;
             results = results.concat(response.data.results);

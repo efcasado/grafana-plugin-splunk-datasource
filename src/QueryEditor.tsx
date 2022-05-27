@@ -1,10 +1,10 @@
-import defaults from "lodash/defaults";
+import defaults from 'lodash/defaults';
 
-import React, { PureComponent } from "react";
-import { QueryField } from "@grafana/ui";
-import { QueryEditorProps } from "@grafana/data";
-import { DataSource } from "./datasource";
-import { defaultQuery, MyDataSourceOptions, MyQuery } from "./types";
+import React, { PureComponent } from 'react';
+import { QueryField } from '@grafana/ui';
+import { QueryEditorProps } from '@grafana/data';
+import { DataSource } from './datasource';
+import { defaultQuery, MyDataSourceOptions, MyQuery } from './types';
 
 type Props = QueryEditorProps<DataSource, MyQuery, MyDataSourceOptions>;
 
@@ -20,11 +20,7 @@ export class QueryEditor extends PureComponent<Props> {
 
     return (
       <div className="gf-form">
-        <QueryField
-          portalOrigin="splunk"
-          query={queryText || ""}
-          onChange={this.onQueryTextChange}
-        />
+        <QueryField portalOrigin="splunk" query={queryText || ''} onChange={this.onQueryTextChange} />
       </div>
     );
   }
