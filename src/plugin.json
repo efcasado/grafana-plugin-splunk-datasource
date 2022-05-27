@@ -30,11 +30,11 @@
     "links": [
       {
         "name": "Website",
-        "url": "https://github.com/grafana/grafana-starter-datasource"
+        "url": "https://github.com/efcasado/grafana-plugin-splunk-datasource"
       },
       {
         "name": "License",
-        "url": "https://github.com/grafana/grafana-starter-datasource/blob/master/LICENSE"
+        "url": "https://github.com/efcasado/grafana-plugin-splunk-datasource/blob/main/LICENSE"
       }
     ],
     "screenshots": [],
