@@ -30,7 +30,7 @@ TBD
    make build
    ```
 
-2. Spin up test environment
+2. Spin up the test environment
 
    ```bash
    make up
