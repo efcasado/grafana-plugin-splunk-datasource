@@ -10,11 +10,13 @@ build-docker:
 	docker build . -t node
 
 build-splunk-datasource:
-	cd plugins/splunk-datasource; yarn install
-	cd plugins/splunk-datasource; yarn dev
+	yarn install
+	yarn build
 
 up:
 	docker-compose up -d
+	sleep 60
+	$(MAKE) configure
 
 configure: | configure-splunk
 

@@ -94,8 +94,8 @@ export class DataSource extends DataSourceApi<MyQuery, MyDataSourceOptions> {
         method: 'GET',
         url: this.url + routePath + '/services/search/jobs/' + sid,
         params: {
-            output_mode: 'json'
-        }
+          output_mode: 'json',
+        },
       })
       .then((response) => {
         let status = response.data.entry[0].content.dispatchState;
@@ -144,40 +144,42 @@ export class DataSource extends DataSourceApi<MyQuery, MyDataSourceOptions> {
     let results: any[] = [];
 
     while (!isFinished) {
-        const routePath = '/splunk-datasource';
-        await getBackendSrv().datasourceRequest({
-            method: 'GET',
-            url: this.url + routePath + '/services/search/jobs/' + sid + '/results',
-            params: {
-                output_mode: 'json',
-                offset: offset,
-                count: count
+      const routePath = '/splunk-datasource';
+      await getBackendSrv()
+        .datasourceRequest({
+          method: 'GET',
+          url: this.url + routePath + '/services/search/jobs/' + sid + '/results',
+          params: {
+            output_mode: 'json',
+            offset: offset,
+            count: count,
+          },
+        })
+        .then((response) => {
+          // console.log(`DEBUG: count=${count} offset=${offset} ${JSON.stringify(response.data)}`);
+          if (response.data.post_process_count === 0 && response.data.results.length === 0) {
+            isFinished = true;
+          } else {
+            if (isFirst) {
+              isFirst = false;
+              fields = response.data.fields.map((field: any) => field['name']);
             }
-        }).then((response) => {
-            // console.log(`DEBUG: count=${count} offset=${offset} ${JSON.stringify(response.data)}`);
-            if (response.data.post_process_count === 0 && response.data.results.length === 0) {
-                isFinished = true;
-            } else {
-                if (isFirst) {
-                    isFirst = false;
-                    fields = response.data.fields.map((field: any) => field['name']);
-                }
-                offset = offset + count;
-                results = results.concat(response.data.results);
-            }
+            offset = offset + count;
+            results = results.concat(response.data.results);
+          }
         });
 
-        offset = offset + count;
+      offset = offset + count;
     }
 
-      return { fields: fields, results: results };
+    return { fields: fields, results: results };
   }
 
   async doRequest(query: MyQuery, options: DataQueryRequest<MyQuery>) {
     const sid: string = await this.doSearchRequest(query, options);
     // console.log(`DEBUG: sid=${sid}`);
 
-    while (!await this.doSearchStatusRequest(sid)) {}
+    while (!(await this.doSearchStatusRequest(sid))) {}
 
     const result = await this.doGetAllResultsRequest(sid);
     return result;

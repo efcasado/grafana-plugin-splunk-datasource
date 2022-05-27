@@ -1,0 +1,15 @@
+apiVersion: 1
+
+datasources:
+  - name: Splunk Datasource
+    type: efcasado-splunk-datasource
+    orgId: 1
+    isDefault: true
+    jsonData:
+      protocol: 'http'
+      endpoint: 'splunk'
+      port: '8089'
+    secureJsonData:
+      username: 'admin'
+      password: 'thisisasecret'
+      token: 'YWRtaW46dGhpc2lzYXNlY3JldA=='
