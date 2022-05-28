@@ -11,7 +11,7 @@ allows you to pull Splunk data into your Grafana dashboards. Or, in other words,
 it is a Grafana plugin that allows you to query Splunk directly from Grafana.
 
 
-## Installation
+### Installation
 
 1. Download the latest version of the plugin
 
@@ -26,7 +26,7 @@ it is a Grafana plugin that allows you to query Splunk directly from Grafana.
     ```
 
 
-## Configuration
+### Configuration
 
 The preferred way to configure Splunk Data Source Plugin for Grafana is using
 a [provisioning file](https://grafana.com/docs/grafana/latest/administration/provisioning/).
@@ -45,7 +45,7 @@ by an administrator from Grafana's UI `Configuration --> Datasources --> Add dat
 | Token    | Basic auth token                                             |
 
 
-## Graphing Splunk results in Grafana
+### Graphing Splunk Results in Grafana
 
 For Grafana to be able to graph the data pulled from your Splunk instance, it
 requieres a `Time` field, which should be formatted as `%Y-%m-%dT%H:%M:%S.000Z`.
@@ -62,7 +62,7 @@ index=_internal *
 ```
 
 
-## Getting started
+### Getting Started
 
 1. Build the project
 
@@ -79,7 +79,7 @@ index=_internal *
 3. Point your browser to [localhost:3000](http://localhost:3000)
 
 
-### License
+## License
 
 > The MIT License (MIT)
 >
