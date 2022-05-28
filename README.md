@@ -28,7 +28,21 @@ it is a Grafana plugin that allows you to query Splunk directly from Grafana.
 
 ## Configuration
 
-TBD
+The preferred way to configure Splunk Data Source Plugin for Grafana is using
+a [provisioning file](https://grafana.com/docs/grafana/latest/administration/provisioning/).
+You can use the provisioning script [included in this repository](https://github.com/efcasado/grafana-plugin-splunk-datasource/blob/main/provisioning/datasources/splunk-datasource.yml)
+as source of inspiration. However, the plugin can also be manually configured
+by an administrator from Grafana's UI `Configuration --> Datasources --> Add data source`.
+
+
+| Field    | Description                                                  |
+|:--------:|--------------------------------------------------------------|
+| Protocol | `http` or `https`                                            |
+| Endpoint | (eg. `localhost`)                                            |
+| Port     | TCP port used by your Splunk instance to expose its REST API |
+| Username | Splunk user                                                  |
+| Password | Splunk password                                              |
+| Token    | Basic auth token                                             |
 
 
 ## Getting started
