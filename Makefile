@@ -1,4 +1,4 @@
-.PHONY: all build build-docker build-splunk-datasource up down
+.PHONY: all build build-docker build-splunk-datasource up down release
 
 SHELL = BASH_ENV=.rc /bin/bash --noprofile
 
@@ -31,3 +31,6 @@ configure-splunk:
 
 down:
 	-docker-compose down
+
+release:
+	npx semantic-release

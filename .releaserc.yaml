@@ -1,0 +1,31 @@
+---
+branch: main
+branches:
+  - main
+plugins:
+  - "@semantic-release/commit-analyzer"
+  - "@semantic-release/release-notes-generator"
+  - "@semantic-release/git"
+analyzeCommits:
+  - path: "@semantic-release/commit-analyzer"
+    releaseRules:
+    - type: "major"
+      release: "major"
+    - type: "breaking"
+      release: "major"
+    - type: "minor"
+      release: "minor"
+    - type: "feat"
+      release: "minor"
+    - type: "patch"
+      release: "patch"
+    - type: "fix"
+      release: "patch"
+    - type: "chore"
+      release: "patch"
+    - type: "no-release"
+      release: false
+publish:
+  - path: "@semantic-release/github"
+    assests:
+      - "dist/**"
