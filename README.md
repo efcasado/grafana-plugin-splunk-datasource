@@ -16,13 +16,13 @@ it is a Grafana plugin that allows you to query Splunk directly from Grafana.
 1. Download the latest version of the plugin
 
     ```bash
-    wget https://github.com/efcasado/grafana-plugin-splunk-datasource/releases/download/v0.1.0/efcasado-splunk-datasource-0.1.0.zip
+    wget https://github.com/efcasado/grafana-plugin-splunk-datasource/releases/download/vX.Y.Z/efcasado-splunk-datasource-X.Y.Z.tar.gz
     ```
 
 2. Unzip it in your Grafana's installation plugin directory (eg. `/var/lib/grafana/plugins`)
 
     ```bash
-    unzip efcasado-splunk-datasource-0.1.0.zip -d YOUR_PLUGIN_DIR/efcasado-splunk-datasource
+    tar -zxf efcasado-splunk-datasource-X.Y.Z.tar.gz -C YOUR_PLUGIN_DIR
     ```
 
 
