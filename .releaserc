@@ -25,14 +25,17 @@
              "changelogFile": "CHANGELOG.md"
          }
         ],
+        ["@semantic-release/exec", {
+            "prepareCmd": "mv dist efcasado-splunk-datasource; zip efcasado-splunk-datasource-${nextRelease.version}.zip efcasado-splunk-datasource -r"
+    }]
         ["@semantic-release/git",
          {
-             "assets": ["dist/**"]
+             "assets": ["efcasado-splunk-datasource-*.zip"]
          }
         ],
         ["@semantic-release/github",
          {
-             "assets": ["dist/**"]
+             "assets": ["efcasado-splunk-datasource-*.zip"]
          }
         ]
     ]
