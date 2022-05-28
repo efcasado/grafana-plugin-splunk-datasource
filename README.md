@@ -13,10 +13,18 @@ it is a Grafana plugin that allows you to query Splunk directly from Grafana.
 
 ## Installation
 
-```
-wget https://github.com/efcasado/grafana-plugin-splunk-datasource/releases/download/untagged-fb7c1c862fd71ffb76f2/efcasado-splunk-datasource-0.1.0.zip
-unzip efcasado-splunk-datasource-0.1.0.zip -d YOUR_PLUGIN_DIR/efcasado-splunk-datasource
-```
+1. Download the latest version of the plugin
+
+    ```bash
+    wget https://github.com/efcasado/grafana-plugin-splunk-datasource/releases/download/v0.1.0/efcasado-splunk-datasource-0.1.0.zip
+    ```
+
+2. Unzip it in your Grafana's installation plugin directory (eg. `/var/lib/grafana/plugins`)
+
+    ```bash
+    unzip efcasado-splunk-datasource-0.1.0.zip -d YOUR_PLUGIN_DIR/efcasado-splunk-datasource
+    ```
+
 
 ## Configuration
 
