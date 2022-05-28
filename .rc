@@ -1,6 +1,6 @@
 function npm() {
     DOCKER_IMAGE=node
-    DOCKER_RUN_OPTS="--rm -v ${PWD}:${PWD} -w ${PWD} -e npm_config_cache=${PWD}/.npm -e npm_config_prefix=${PWD} -e YARN_CACHE_FOLDER=${PWD}/.cache/yarn"
+    DOCKER_RUN_OPTS="--rm -v ${PWD}:${PWD} -w ${PWD} -e npm_config_cache=${PWD}/.npm -e npm_config_prefix=${PWD} -e YARN_CACHE_FOLDER=${PWD}/.cache/yarn -e GITHUB_TOKEN"
     if [ -n "$ZSH_VERSION" ]; then
         docker run ${=DOCKER_RUN_OPTS} --entrypoint=npm ${DOCKER_IMAGE} "$@"
     else
@@ -10,7 +10,7 @@ function npm() {
 
 function npx() {
     DOCKER_IMAGE=node
-    DOCKER_RUN_OPTS="--rm -v ${PWD}:${PWD} -w ${PWD} -e npm_config_cache=${PWD}/.npm -e npm_config_prefix=${PWD} -e YARN_CACHE_FOLDER=${PWD}/.cache/yarn"
+    DOCKER_RUN_OPTS="--rm -v ${PWD}:${PWD} -w ${PWD} -e npm_config_cache=${PWD}/.npm -e npm_config_prefix=${PWD} -e YARN_CACHE_FOLDER=${PWD}/.cache/yarn -e GITHUB_TOKEN"
 
     if [ -n "$ZSH_VERSION" ]; then
         docker run ${=DOCKER_RUN_OPTS} --entrypoint=npx ${DOCKER_IMAGE} "$@"
@@ -21,7 +21,7 @@ function npx() {
 
 function yarn() {
     DOCKER_IMAGE=node
-    DOCKER_RUN_OPTS="--rm -v ${PWD}:${PWD} -w ${PWD} -e NODE_OPTIONS=--openssl-legacy-provider -e npm_config_cache=${PWD}/.npm -e npm_config_prefix=${PWD}/.npm -e YARN_CACHE_FOLDER=${PWD}/.cache/yarn"
+    DOCKER_RUN_OPTS="--rm -v ${PWD}:${PWD} -w ${PWD} -e NODE_OPTIONS=--openssl-legacy-provider -e npm_config_cache=${PWD}/.npm -e npm_config_prefix=${PWD}/.npm -e YARN_CACHE_FOLDER=${PWD}/.cache/yarn -e GITHUB_TOKEN"
     if [ -n "$ZSH_VERSION" ]; then
         docker run ${=DOCKER_RUN_OPTS} --entrypoint=yarn ${DOCKER_IMAGE} "$@"
     else
