@@ -52,7 +52,7 @@ requieres a `Time` field, which should be formatted as `%Y-%m-%dT%H:%M:%S.000Z`.
 An easy way to achieve this is including the following command to your
 Splunk queries: `eval _time=strftime(_time, "%Y-%m-%dT%H:%M:%S.000Z") | rename _time AS Time`.
 
-<img width="420" alt="graphing-splunk-results-in-grafana" src="https://user-images.githubusercontent.com/603610/170813937-2d7f03c6-d0d7-49b8-83a7-3c1b186fd0f7.png">
+<img width="100%" alt="graphing-splunk-results-in-grafana" src="https://user-images.githubusercontent.com/603610/170813937-2d7f03c6-d0d7-49b8-83a7-3c1b186fd0f7.png">
 
 ```
 index=_internal *
