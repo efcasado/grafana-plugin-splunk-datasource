@@ -10,9 +10,7 @@ Splunk Data Source Plugin for Grafana is a Grafana (data source) plugin that
 allows you to pull Splunk data into your Grafana dashboards. Or, in other words,
 it is a Grafana plugin that allows you to query Splunk directly from Grafana.
 
-<img width="100%" alt="splunk-graph-in-grafana" src="https://user-images.githubusercontent.com/603610/170837503-a9cc164c-6d69-4134-97d2-f585b66fc9b5.png">
-
-
+<img width="100%" alt="splunk-graph-in-grafana" src="https://user-images.githubusercontent.com/603610/170838214-fbff2912-dce6-49fd-9c22-c00048c0da6e.png">
 
 
 ### Installation
