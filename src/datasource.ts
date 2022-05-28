@@ -20,6 +20,7 @@ export class DataSource extends DataSourceApi<MyQuery, MyDataSourceOptions> {
   }
 
   async query(options: DataQueryRequest<MyQuery>): Promise<DataQueryResponse> {
+    const moment = require('moment');
     const promises = options.targets.map((query) =>
       this.doRequest(query, options).then((response) => {
         const frame = new MutableDataFrame({
@@ -39,8 +40,14 @@ export class DataSource extends DataSourceApi<MyQuery, MyDataSourceOptions> {
         response.results.forEach((result: any) => {
           // console.log(`DEBUG: result=${JSON.stringify(result)}`);
           let row: any[] = [];
+
           response.fields.forEach((field: any) => {
-            row.push(result[field]);
+            if (field === 'Time') {
+              let time = moment(result['_time']).format('YYYY-MM-DDTHH:mm:ssZ');
+              row.push(time);
+            } else {
+              row.push(result[field]);
+            }
           });
           frame.appendRow(row);
         });
@@ -170,6 +177,18 @@ export class DataSource extends DataSourceApi<MyQuery, MyDataSourceOptions> {
         });
 
       offset = offset + count;
+    }
+
+    if (fields.includes('_time')) {
+      fields.push('Time');
+    }
+
+    const index = fields.indexOf('_raw', 0);
+    if (index > -1) {
+      fields.splice(index, 1);
+      fields = fields.reverse();
+      fields.push('_raw');
+      fields = fields.reverse();
     }
 
     return { fields: fields, results: results };
