@@ -38,9 +38,13 @@ jobs:
       - name: Build plugin
         run: make build
 
-      - name: Release
+      - name: Release (dry run)
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          npm install install @semantic-release/git semantic-release
-          npx semantic-release
+        run: RELEASE_OPTS=--dry-run make release
+
+      - name: Release
+        if: ${{ github.ref == 'ref/head/main' }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: make release

@@ -5,6 +5,7 @@ branches:
 plugins:
   - "@semantic-release/commit-analyzer"
   - "@semantic-release/release-notes-generator"
+  - "@semantic-release/npm"
   - "@semantic-release/git"
 analyzeCommits:
   - path: "@semantic-release/commit-analyzer"
@@ -26,6 +27,9 @@ analyzeCommits:
     - type: "no-release"
       release: false
 publish:
+  - path: "@semantic-release/npm"
+    npmPublish: false
+    tarballDir: "dist"
+
   - path: "@semantic-release/github"
-    assests:
-      - "dist/**"
+    assests: "dist/*.tgz"
