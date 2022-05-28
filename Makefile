@@ -33,5 +33,5 @@ down:
 	-docker-compose down
 
 release:
-	npm install install @semantic-release/git semantic-release
+	npm install install @semantic-release/git @semantic-release/changelog semantic-release
 	npx semantic-release $(RELEASE_OPTS)

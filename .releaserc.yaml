@@ -26,6 +26,9 @@ analyzeCommits:
       release: "patch"
     - type: "no-release"
       release: false
+generateNotes:
+  - path: "@semantic-release/changelog"
+    changelogFile: "CHANGELOG.md"
 publish:
   - path: "@semantic-release/npm"
     npmPublish: false
