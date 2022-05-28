@@ -44,7 +44,7 @@ jobs:
         run: RELEASE_OPTS=--dry-run make release
 
       - name: Release
-        if: ${{ github.ref == 'ref/head/main' }}
+        if: ${{ github.ref == 'refs/head/main' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: make release
