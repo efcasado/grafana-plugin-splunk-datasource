@@ -42,10 +42,14 @@ jobs:
         if: github.ref != 'refs/heads/main'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: RELEASE_OPTS=--dry-run make release
+        run: |
+          sudo npm install install @semantic-release/git @semantic-release/changelog semantic-release@19.0.2
+          sudo npx semantic-release --dry-run
 
       - name: Release
         if: github.ref == 'refs/heads/main'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: RELEASE_OPTS=--no-ci make release
+        run: |
+          sudo npm install install @semantic-release/git @semantic-release/changelog semantic-release@19.0.2
+          sudo npx semantic-release
