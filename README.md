@@ -11,9 +11,11 @@ allows you to pull Splunk data into your Grafana dashboards. Or, in other words,
 it is a Grafana plugin that allows you to query Splunk directly from Grafana.
 
 <p float="left">
-    <img width="45%" alt="graphing-splunk-results-in-grafana" src="https://user-images.githubusercontent.com/603610/170813937-2d7f03c6-d0d7-49b8-83a7-3c1b186fd0f7.png">
-    <img width="45%" alt="graphing-splunk-results-in-grafana" src="https://user-images.githubusercontent.com/603610/170813937-2d7f03c6-d0d7-49b8-83a7-3c1b186fd0f7.png">
+    <img width="45%" alt="splunk-graph-in-grafana" src="https://user-images.githubusercontent.com/603610/170837503-a9cc164c-6d69-4134-97d2-f585b66fc9b5.png">
+    <img width="45" alt="splunk-logs-in-grafana" src="https://user-images.githubusercontent.com/603610/170837506-e8d21f3d-0129-4359-9a26-e04cbc007b20.png">
 </p>
+
+
 
 
 ### Installation
