@@ -10,6 +10,7 @@ Splunk Data Source Plugin for Grafana is a Grafana (data source) plugin that
 allows you to pull Splunk data into your Grafana dashboards. Or, in other words,
 it is a Grafana plugin that allows you to query Splunk directly from Grafana.
 
+<img width="50%" alt="graphing-splunk-results-in-grafana" src="https://user-images.githubusercontent.com/603610/170813937-2d7f03c6-d0d7-49b8-83a7-3c1b186fd0f7.png"><img width="50%" alt="graphing-splunk-results-in-grafana" src="https://user-images.githubusercontent.com/603610/170813937-2d7f03c6-d0d7-49b8-83a7-3c1b186fd0f7.png">
 
 ### Installation
 
@@ -43,23 +44,6 @@ by an administrator from Grafana's UI `Configuration --> Datasources --> Add dat
 | Username | Splunk user                                                  |
 | Password | Splunk password                                              |
 | Token    | Basic auth token                                             |
-
-
-### Graphing Splunk Results in Grafana
-
-For Grafana to be able to graph the data pulled from your Splunk instance, it
-requieres a `Time` field, which should be formatted as `%Y-%m-%dT%H:%M:%S.000Z`.
-An easy way to achieve this is including the following command to your
-Splunk queries: `eval _time=strftime(_time, "%Y-%m-%dT%H:%M:%S.000Z") | rename _time AS Time`.
-
-<img width="100%" alt="graphing-splunk-results-in-grafana" src="https://user-images.githubusercontent.com/603610/170813937-2d7f03c6-d0d7-49b8-83a7-3c1b186fd0f7.png">
-
-```
-index=_internal *
-| timechart span=1m count
-| eval _time=strftime(_time, "%Y-%m-%dT%H:%M:%S.000Z")
-| rename _time AS Time
-```
 
 
 ### Getting Started
