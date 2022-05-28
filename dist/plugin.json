@@ -1,0 +1,48 @@
+{
+  "$schema": "https://raw.githubusercontent.com/grafana/grafana/master/docs/sources/developers/plugins/plugin.schema.json",
+  "type": "datasource",
+  "name": "splunk-datasource",
+  "id": "efcasado-splunk-datasource",
+  "routes": [
+      {
+          "path": "splunk-datasource",
+          "url": "{{ .JsonData.protocol }}://admin:thisisasecret@{{ .JsonData.endpoint }}:{{ .JsonData.port }}",
+          "headers": [
+              {
+                  "name": "Authorization",
+                  "content": "Basic {{ .SecureJsonData.token }}"
+              }
+          ]
+      }
+  ],
+  "metrics": true,
+  "info": {
+    "description": "",
+    "author": {
+      "name": "efcasado",
+      "url": ""
+    },
+    "keywords": [],
+    "logos": {
+      "small": "img/logo.svg",
+      "large": "img/logo.svg"
+    },
+    "links": [
+      {
+        "name": "Website",
+        "url": "https://github.com/efcasado/grafana-plugin-splunk-datasource"
+      },
+      {
+        "name": "License",
+        "url": "https://github.com/efcasado/grafana-plugin-splunk-datasource/blob/main/LICENSE"
+      }
+    ],
+    "screenshots": [],
+    "version": "0.1.1",
+    "updated": "2022-05-28"
+  },
+  "dependencies": {
+    "grafanaDependency": ">=7.0.0",
+    "plugins": []
+  }
+}
