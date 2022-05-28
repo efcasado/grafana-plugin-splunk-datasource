@@ -45,6 +45,21 @@ by an administrator from Grafana's UI `Configuration --> Datasources --> Add dat
 | Token    | Basic auth token                                             |
 
 
+## Graphing Splunk results in Grafana
+
+For Grafana to be able to graph the data pulled from your Splunk instance, it
+requieres a `Time` field, which should be formatted as `%Y-%m-%dT%H:%M:%S.000Z`.
+An easy way to achieve this is including the following command to your
+Splunk queries: `eval _time=strftime(_time, "%Y-%m-%dT%H:%M:%S.000Z") | rename _time AS Time`.
+
+```
+index=_internal *
+| timechart span=1m count
+| eval _time=strftime(_time, "%Y-%m-%dT%H:%M:%S.000Z")
+| rename _time AS Time
+```
+
+
 ## Getting started
 
 1. Build the project
