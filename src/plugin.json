@@ -6,11 +6,11 @@
   "routes": [
       {
           "path": "splunk-datasource",
-          "url": "{{ .JsonData.protocol }}://admin:thisisasecret@{{ .JsonData.endpoint }}:{{ .JsonData.port }}",
+          "url": "{{ .JsonData.endpoint }}",
           "headers": [
               {
                   "name": "Authorization",
-                  "content": "Basic {{ .SecureJsonData.token }}"
+                  "content": "Basic {{ .SecureJsonData.basicAuthToken }}"
               }
           ]
       }
