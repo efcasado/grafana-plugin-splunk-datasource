@@ -8,9 +8,9 @@ import {
   MutableDataFrame,
 } from '@grafana/data';
 
-import { MyQuery, MyDataSourceOptions } from './types';
+import { SplunkQuery, MyDataSourceOptions } from './types';
 
-export class DataSource extends DataSourceApi<MyQuery, MyDataSourceOptions> {
+export class DataSource extends DataSourceApi<SplunkQuery, MyDataSourceOptions> {
   url?: string;
 
   constructor(instanceSettings: DataSourceInstanceSettings<MyDataSourceOptions>) {
@@ -19,7 +19,7 @@ export class DataSource extends DataSourceApi<MyQuery, MyDataSourceOptions> {
     this.url = instanceSettings.url;
   }
 
-  async query(options: DataQueryRequest<MyQuery>): Promise<DataQueryResponse> {
+  async query(options: DataQueryRequest<SplunkQuery>): Promise<DataQueryResponse> {
     const moment = require('moment');
     const promises = options.targets.map((query) =>
       this.doRequest(query, options).then((response) => {
@@ -113,7 +113,7 @@ export class DataSource extends DataSourceApi<MyQuery, MyDataSourceOptions> {
     return result;
   }
 
-  async doSearchRequest(query: MyQuery, options: DataQueryRequest<MyQuery>) {
+  async doSearchRequest(query: SplunkQuery, options: DataQueryRequest<SplunkQuery>) {
     const routePath = '/splunk-datasource';
     const { range } = options;
     const from = Math.floor(range!.from.valueOf() / 1000);
@@ -194,7 +194,7 @@ export class DataSource extends DataSourceApi<MyQuery, MyDataSourceOptions> {
     return { fields: fields, results: results };
   }
 
-  async doRequest(query: MyQuery, options: DataQueryRequest<MyQuery>) {
+  async doRequest(query: SplunkQuery, options: DataQueryRequest<SplunkQuery>) {
     const sid: string = await this.doSearchRequest(query, options);
     // console.log(`DEBUG: sid=${sid}`);
 

@@ -1,10 +1,10 @@
 import { DataQuery, DataSourceJsonData } from '@grafana/data';
 
-export interface MyQuery extends DataQuery {
+export interface SplunkQuery extends DataQuery {
   queryText: string;
 }
 
-export const defaultQuery: Partial<MyQuery> = {
+export const defaultQuery: Partial<SplunkQuery> = {
   queryText: '',
 };
 
