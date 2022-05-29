@@ -65,12 +65,11 @@ export class DataSource extends DataSourceApi<SplunkQuery, SplunkDataSourceOptio
       output_mode: 'json',
       exec_mode: 'oneshot',
     }).toString();
-    const routePath = '/splunk-datasource';
 
     return getBackendSrv()
       .datasourceRequest({
         method: 'POST',
-        url: this.url + routePath + '/services/search/jobs',
+        url: this.url + '/services/search/jobs',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
         },
@@ -95,11 +94,10 @@ export class DataSource extends DataSourceApi<SplunkQuery, SplunkDataSourceOptio
   }
 
   async doSearchStatusRequest(sid: string) {
-    const routePath = '/splunk-datasource';
     const result: boolean = await getBackendSrv()
       .datasourceRequest({
         method: 'GET',
-        url: this.url + routePath + '/services/search/jobs/' + sid,
+        url: this.url + '/services/search/jobs/' + sid,
         params: {
           output_mode: 'json',
         },
@@ -114,7 +112,6 @@ export class DataSource extends DataSourceApi<SplunkQuery, SplunkDataSourceOptio
   }
 
   async doSearchRequest(query: SplunkQuery, options: DataQueryRequest<SplunkQuery>) {
-    const routePath = '/splunk-datasource';
     const { range } = options;
     const from = Math.floor(range!.from.valueOf() / 1000);
     const to = Math.floor(range!.to.valueOf() / 1000);
@@ -129,7 +126,7 @@ export class DataSource extends DataSourceApi<SplunkQuery, SplunkDataSourceOptio
     const sid: string = await getBackendSrv()
       .datasourceRequest({
         method: 'POST',
-        url: this.url + routePath + '/services/search/jobs',
+        url: this.url + '/services/search/jobs',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
         },
@@ -151,11 +148,10 @@ export class DataSource extends DataSourceApi<SplunkQuery, SplunkDataSourceOptio
     let results: any[] = [];
 
     while (!isFinished) {
-      const routePath = '/splunk-datasource';
       await getBackendSrv()
         .datasourceRequest({
           method: 'GET',
-          url: this.url + routePath + '/services/search/jobs/' + sid + '/results',
+          url: this.url + '/services/search/jobs/' + sid + '/results',
           params: {
             output_mode: 'json',
             offset: offset,

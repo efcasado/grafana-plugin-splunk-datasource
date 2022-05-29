@@ -42,16 +42,6 @@ as source of inspiration. However, the plugin can also be manually configured
 by an administrator from Grafana's UI `Configuration --> Datasources --> Add data source`.
 
 
-| Field            | Description                                                                                    |
-|:----------------:|------------------------------------------------------------------------------------------------|
-| Endpoint         | URL of your Splunk instance's REST API endpoint (eg. `http://localhost:8089`)                  |
-| Basic Auth Token | Basic64 encoding of your Basic Auth username and password, separated with a single colon (`:`) |
-
-> You may also need to disable SSL on your Splunk instance. You can read more
-> about how to do this in Splunk's [official documentation](https://docs.splunk.com/Documentation/Splunk/latest/Admin/Serverconf)
-> (search for `enableSplunkdSSL`).
-
-
 ### Getting Started
 
 1. Build the project

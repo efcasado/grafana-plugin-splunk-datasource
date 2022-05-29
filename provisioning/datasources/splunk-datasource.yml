@@ -5,7 +5,11 @@ datasources:
     type: efcasado-splunk-datasource
     orgId: 1
     isDefault: true
+    access: proxy
+    url: https://splunk:8089
+    basicAuth: true
+    basicAuthUser: admin
     jsonData:
-      endpoint: 'http://splunk:8089'
+      tlsSkipVerify: true
     secureJsonData:
-      basicAuthToken: 'YWRtaW46dGhpc2lzYXNlY3JldA=='
+      basicAuthPassword: thisisasecret

@@ -15,17 +15,6 @@ build-splunk-datasource:
 
 up:
 	docker-compose up -d
-	sleep 60
-	$(MAKE) configure
-
-configure: | configure-splunk
-
-
-SPLUNK_CONTAINER=grafana-plugin-splunk-datasource-splunk-1
-SPLUNK_CONFIG_FILE=/opt/splunk/etc/system/default/server.conf
-configure-splunk:
-	docker exec $(SPLUNK_CONTAINER) sudo sed -i -E 's/^(enableSplunkdSSL = ).*$$/\1false/g' $(SPLUNK_CONFIG_FILE)
-	docker exec $(SPLUNK_CONTAINER) sudo /opt/splunk/bin/splunk restart
 
 down:
 	-docker-compose down
