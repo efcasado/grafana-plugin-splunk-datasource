@@ -6,10 +6,6 @@ datasources:
     orgId: 1
     isDefault: true
     jsonData:
-      protocol: 'http'
-      endpoint: 'splunk'
-      port: '8089'
+      endpoint: 'http://splunk:8089'
     secureJsonData:
-      username: 'admin'
-      password: 'thisisasecret'
-      token: 'YWRtaW46dGhpc2lzYXNlY3JldA=='
+      basicAuthToken: 'YWRtaW46dGhpc2lzYXNlY3JldA=='

@@ -3,6 +3,11 @@
 ![Splunk Data Source for Grafana](https://github.com/efcasado/grafana-plugin-splunk-datasource/actions/workflows/ci.yml/badge.svg?branch=main)
 [!["Buy Me A Coffee"](https://img.shields.io/badge/-buy_me_a%C2%A0coffee-gray?logo=buy-me-a-coffee)](https://www.buymeacoffee.com/efcasado)
 
+> **DISCLAIMER!**
+> This plugin is a proof-of-concept and breaking changes are very likely to be introduced.
+> Also, it has only been used in toy environment. Thus, if you are considering using it
+> in a production environment, do it at your own risk!
+
 
 ## What is Splunk Data Source Plugin for Grafana?
 
@@ -37,14 +42,14 @@ as source of inspiration. However, the plugin can also be manually configured
 by an administrator from Grafana's UI `Configuration --> Datasources --> Add data source`.
 
 
-| Field    | Description                                                  |
-|:--------:|--------------------------------------------------------------|
-| Protocol | `http` or `https`                                            |
-| Endpoint | (eg. `localhost`)                                            |
-| Port     | TCP port used by your Splunk instance to expose its REST API |
-| Username | Splunk user                                                  |
-| Password | Splunk password                                              |
-| Token    | Basic auth token                                             |
+| Field            | Description                                                                                    |
+|:----------------:|------------------------------------------------------------------------------------------------|
+| Endpoint         | URL of your Splunk instance's REST API endpoint (eg. `http://localhost:8089`)                  |
+| Basic Auth Token | Basic64 encoding of your Basic Auth username and password, separated with a single colon (`:`) |
+
+> You may also need to disable SSL on your Splunk instance. You can read more
+> about how to do this in Splunk's [official documentation](https://docs.splunk.com/Documentation/Splunk/latest/Admin/Serverconf)
+> (search for `enableSplunkdSSL`).
 
 
 ### Getting Started

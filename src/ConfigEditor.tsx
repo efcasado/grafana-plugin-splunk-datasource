@@ -10,15 +10,6 @@ interface Props extends DataSourcePluginOptionsEditorProps<SplunkDataSourceOptio
 interface State {}
 
 export class ConfigEditor extends PureComponent<Props, State> {
-  onProtocolChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const { onOptionsChange, options } = this.props;
-    const jsonData = {
-      ...options.jsonData,
-      protocol: event.target.value,
-    };
-    onOptionsChange({ ...options, jsonData });
-  };
-
   onEndpointChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { onOptionsChange, options } = this.props;
     const jsonData = {
@@ -28,89 +19,28 @@ export class ConfigEditor extends PureComponent<Props, State> {
     onOptionsChange({ ...options, jsonData });
   };
 
-  onPortChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const { onOptionsChange, options } = this.props;
-    const jsonData = {
-      ...options.jsonData,
-      port: event.target.value,
-    };
-    onOptionsChange({ ...options, jsonData });
-  };
-
   // Secure field (only sent to the backend)
-  onUsernameChange = (event: ChangeEvent<HTMLInputElement>) => {
+  onBasicAuthTokenChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { onOptionsChange, options } = this.props;
     onOptionsChange({
       ...options,
       secureJsonData: {
-        username: event.target.value,
+        basicAuthToken: event.target.value,
       },
     });
   };
 
-  onResetUsername = () => {
+  onResetBasicAuthToken = () => {
     const { onOptionsChange, options } = this.props;
     onOptionsChange({
       ...options,
       secureJsonFields: {
         ...options.secureJsonFields,
-        username: false,
+        basicAuthToken: false,
       },
       secureJsonData: {
         ...options.secureJsonData,
-        username: '',
-      },
-    });
-  };
-
-  // Secure field (only sent to the backend)
-  onPasswordChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const { onOptionsChange, options } = this.props;
-    onOptionsChange({
-      ...options,
-      secureJsonData: {
-        password: event.target.value,
-      },
-    });
-  };
-
-  onResetPassword = () => {
-    const { onOptionsChange, options } = this.props;
-    onOptionsChange({
-      ...options,
-      secureJsonFields: {
-        ...options.secureJsonFields,
-        password: false,
-      },
-      secureJsonData: {
-        ...options.secureJsonData,
-        password: '',
-      },
-    });
-  };
-
-  // Secure field (only sent to the backend)
-  onTokenChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const { onOptionsChange, options } = this.props;
-    onOptionsChange({
-      ...options,
-      secureJsonData: {
-        token: event.target.value,
-      },
-    });
-  };
-
-  onResetToken = () => {
-    const { onOptionsChange, options } = this.props;
-    onOptionsChange({
-      ...options,
-      secureJsonFields: {
-        ...options.secureJsonFields,
-        token: false,
-      },
-      secureJsonData: {
-        ...options.secureJsonData,
-        token: '',
+        basicAuthToken: '',
       },
     });
   };
@@ -124,17 +54,6 @@ export class ConfigEditor extends PureComponent<Props, State> {
       <div className="gf-form-group">
         <div className="gf-form">
           <FormField
-            label="Protocol"
-            labelWidth={6}
-            inputWidth={20}
-            onChange={this.onProtocolChange}
-            value={jsonData.protocol || ''}
-            placeholder="<protocol>"
-          />
-        </div>
-
-        <div className="gf-form">
-          <FormField
             label="Endpoint"
             labelWidth={6}
             inputWidth={20}
@@ -144,58 +63,17 @@ export class ConfigEditor extends PureComponent<Props, State> {
           />
         </div>
 
-        <div className="gf-form">
-          <FormField
-            label="Port"
-            labelWidth={6}
-            inputWidth={20}
-            onChange={this.onPortChange}
-            value={jsonData.port || ''}
-            placeholder="<port>"
-          />
-        </div>
-
         <div className="gf-form-inline">
           <div className="gf-form">
             <SecretFormField
-              isConfigured={(secureJsonFields && secureJsonFields.username) as boolean}
-              value={secureJsonData.username || ''}
-              label="Username"
-              placeholder="<username>"
-              labelWidth={6}
-              inputWidth={20}
-              onReset={this.onResetUsername}
-              onChange={this.onUsernameChange}
-            />
-          </div>
-        </div>
-
-        <div className="gf-form-inline">
-          <div className="gf-form">
-            <SecretFormField
-              isConfigured={(secureJsonFields && secureJsonFields.password) as boolean}
-              value={secureJsonData.password || ''}
-              label="Password"
-              placeholder="<password>"
-              labelWidth={6}
-              inputWidth={20}
-              onReset={this.onResetPassword}
-              onChange={this.onPasswordChange}
-            />
-          </div>
-        </div>
-
-        <div className="gf-form-inline">
-          <div className="gf-form">
-            <SecretFormField
-              isConfigured={(secureJsonFields && secureJsonFields.token) as boolean}
-              value={secureJsonData.token || ''}
-              label="Token"
+              isConfigured={(secureJsonFields && secureJsonFields.basicAuthToken) as boolean}
+              value={secureJsonData.basicAuthToken || ''}
+              label="Basic Auth token"
               placeholder="<token>"
-              labelWidth={6}
-              inputWidth={20}
-              onReset={this.onResetToken}
-              onChange={this.onTokenChange}
+              labelWidth={10}
+              inputWidth={16}
+              onReset={this.onResetBasicAuthToken}
+              onChange={this.onBasicAuthTokenChange}
             />
           </div>
         </div>
