@@ -42,11 +42,6 @@ by an administrator from Grafana's UI `Configuration --> Datasources --> Add dat
 | Endpoint         | URL of your Splunk instance's REST API endpoint (eg. `http://localhost:8089`)                  |
 | Basic Auth Token | Basic64 encoding of your Basic Auth username and password, separated with a single colon (`:`) |
 
-> You may need to configure your Splunk instance to accept Cross-Origin Resource
-> Sharing (CORS) requests. You can read more about how to do this in Splunk's
-> [official documentation](https://docs.splunk.com/Documentation/Splunk/latest/Admin/Serverconf)
-> (search for `crossOriginSharingPolicy` and `crossOriginSharingHeaders`).
-
 > You may also need to disable SSL on your Splunk instance. You can read more
 > about how to do this in Splunk's [official documentation](https://docs.splunk.com/Documentation/Splunk/latest/Admin/Serverconf)
 > (search for `enableSplunkdSSL`).
