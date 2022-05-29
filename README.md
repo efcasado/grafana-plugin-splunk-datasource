@@ -5,7 +5,7 @@
 
 > **DISCLAIMER!**
 > This plugin is a proof-of-concept and breaking changes are very likely to be introduced.
-> Also, it has only been used in toy environment. Thus, if you are considering using it
+> Also, it has only been used in toy environments. Thus, if you are considering using it
 > in a production environment, do it at your own risk!
 
 
