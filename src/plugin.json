@@ -3,18 +3,6 @@
   "type": "datasource",
   "name": "splunk-datasource",
   "id": "efcasado-splunk-datasource",
-  "routes": [
-      {
-          "path": "splunk-datasource",
-          "url": "{{ .JsonData.endpoint }}",
-          "headers": [
-              {
-                  "name": "Authorization",
-                  "content": "Basic {{ .SecureJsonData.basicAuthToken }}"
-              }
-          ]
-      }
-  ],
   "metrics": true,
   "info": {
     "description": "",
