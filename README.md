@@ -3,6 +3,11 @@
 ![Splunk Data Source for Grafana](https://github.com/efcasado/grafana-plugin-splunk-datasource/actions/workflows/ci.yml/badge.svg?branch=main)
 [!["Buy Me A Coffee"](https://img.shields.io/badge/-buy_me_a%C2%A0coffee-gray?logo=buy-me-a-coffee)](https://www.buymeacoffee.com/efcasado)
 
+> **DISCLAIMER!**
+> This plugin is a proof-of-concept and breaking changes are very likely to be introduced.
+> Also, it has only been used in toy environment. Thus, if you are considering using it
+> in a production environment, do it at your own risk!
+
 
 ## What is Splunk Data Source Plugin for Grafana?
 
