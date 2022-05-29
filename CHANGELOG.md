@@ -1,3 +1,10 @@
+## [0.3.3](https://github.com/efcasado/grafana-plugin-splunk-datasource/compare/v0.3.2...v0.3.3) (2022-05-29)
+
+
+### Bug Fixes
+
+* **config:** Use official HttpProxySettings to configure Splunk Datasource ([#30](https://github.com/efcasado/grafana-plugin-splunk-datasource/issues/30)) ([39b7418](https://github.com/efcasado/grafana-plugin-splunk-datasource/commit/39b7418669e8a95be696786fcc8d07201035d9a1))
+
 ## [0.3.2](https://github.com/efcasado/grafana-plugin-splunk-datasource/compare/v0.3.1...v0.3.2) (2022-05-29)
 
 
