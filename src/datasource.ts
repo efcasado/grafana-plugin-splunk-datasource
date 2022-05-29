@@ -8,12 +8,12 @@ import {
   MutableDataFrame,
 } from '@grafana/data';
 
-import { SplunkQuery, MyDataSourceOptions } from './types';
+import { SplunkQuery, SplunkDataSourceOptions } from './types';
 
-export class DataSource extends DataSourceApi<SplunkQuery, MyDataSourceOptions> {
+export class DataSource extends DataSourceApi<SplunkQuery, SplunkDataSourceOptions> {
   url?: string;
 
-  constructor(instanceSettings: DataSourceInstanceSettings<MyDataSourceOptions>) {
+  constructor(instanceSettings: DataSourceInstanceSettings<SplunkDataSourceOptions>) {
     super(instanceSettings);
 
     this.url = instanceSettings.url;

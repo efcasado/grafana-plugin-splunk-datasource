@@ -4,9 +4,9 @@ import React, { PureComponent } from 'react';
 import { QueryField } from '@grafana/ui';
 import { QueryEditorProps } from '@grafana/data';
 import { DataSource } from './datasource';
-import { defaultQuery, MyDataSourceOptions, SplunkQuery } from './types';
+import { defaultQuery, SplunkDataSourceOptions, SplunkQuery } from './types';
 
-type Props = QueryEditorProps<DataSource, SplunkQuery, MyDataSourceOptions>;
+type Props = QueryEditorProps<DataSource, SplunkQuery, SplunkDataSourceOptions>;
 
 export class QueryEditor extends PureComponent<Props> {
   onQueryTextChange = (value: string) => {

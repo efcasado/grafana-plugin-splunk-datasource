@@ -11,7 +11,7 @@ export const defaultQuery: Partial<SplunkQuery> = {
 /**
  * These are options configured for each DataSource instance
  */
-export interface MyDataSourceOptions extends DataSourceJsonData {
+export interface SplunkDataSourceOptions extends DataSourceJsonData {
   protocol?: string;
   endpoint?: string;
   port?: string;
