@@ -4,6 +4,9 @@
   "name": "splunk-datasource",
   "id": "efcasado-splunk-datasource",
   "metrics": true,
+  "alerting": true,
+  "backend": true,
+  "category": "tsdb",
   "info": {
     "description": "",
     "author": {
