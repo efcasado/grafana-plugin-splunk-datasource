@@ -28,3 +28,23 @@ function yarn() {
         docker run ${DOCKER_RUN_OPTS} --entrypoint=yarn ${DOCKER_IMAGE} "$@"
     fi
 }
+
+function go() {
+    DOCKER_IMAGE=go
+    DOCKER_RUN_OPTS="--rm -v ${PWD}:${PWD} -w ${PWD} -e GOPATH=${PWD}/go"
+    if [ -n "$ZSH_VERSION" ]; then
+        docker run ${=DOCKER_RUN_OPTS} ${DOCKER_IMAGE} go "$@"
+    else
+        docker run ${DOCKER_RUN_OPTS} ${DOCKER_IMAGE} go "$@"
+    fi
+}
+
+function mage() {
+    DOCKER_IMAGE=go
+    DOCKER_RUN_OPTS="--rm -v ${PWD}:${PWD} -w ${PWD} -e GOPATH=${PWD}/go"
+    if [ -n "$ZSH_VERSION" ]; then
+        docker run ${=DOCKER_RUN_OPTS} ${DOCKER_IMAGE} mage "$@"
+    else
+        docker run ${DOCKER_RUN_OPTS} ${DOCKER_IMAGE} mage "$@"
+    fi
+}
