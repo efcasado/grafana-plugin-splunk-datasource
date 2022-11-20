@@ -8,7 +8,7 @@ build: | build-docker build-splunk-datasource
 
 build-docker:
 	docker build . -t node -f Dockerfile.node
-	docker build . -t go -f Dockerfile.go
+	docker build . -t go -f Dockerfile.godev
 
 build-splunk-datasource:
 	yarn install
