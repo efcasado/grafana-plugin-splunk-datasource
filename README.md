@@ -30,18 +30,33 @@ it is a Grafana plugin that allows you to query Splunk directly from Grafana.
     ```bash
     tar -zxf efcasado-splunk-datasource-X.Y.Z.tar.gz -C YOUR_PLUGIN_DIR
     ```
+3. As of Grafana v8+ you must explicitly define any unsigned plugins that you wish to allow / load (eg edit:  `/etc/grafana/grafana.ini`
 
-
+    ```allow_loading_unsigned_plugins = efcasado-splunk-datasource ```
+ 
 ### Configuration
 
 The preferred way to configure Splunk Data Source Plugin for Grafana is using
 a [provisioning file](https://grafana.com/docs/grafana/latest/administration/provisioning/).
 You can use the provisioning script [included in this repository](https://github.com/efcasado/grafana-plugin-splunk-datasource/blob/main/provisioning/datasources/splunk-datasource.yml)
 as source of inspiration. However, the plugin can also be manually configured
-by an administrator from Grafana's UI `Configuration --> Datasources --> Add data source`.
+by an administrator from Grafana's UI `Configuration --> Datasources --> Add data source`. 
+
+NB: By default Splunk's REST API is only available via HTTPS (even if you allow HTTP access on a differen port), ie it is usually at: https://<ServerIP>:8089
+
+(example configuration via the Grafana web-GUI (in grafana v9.3.4):
+ 
+![image](https://user-images.githubusercontent.com/60830628/221431256-ed3b9a8a-fdb0-4e0c-8ec7-9aa72477ac65.png)
+
+    
+### Testing in Grafana:
+    Using a standard Splunk Query as a Grafana Query (and showing splunk results):
+![image](https://user-images.githubusercontent.com/60830628/221431676-ca1f1982-1377-4753-aecb-5e447f34ce7c.png)
+    
+ 
 
 
-### Getting Started
+## Getting Started with Docker (Build/Run in Docker)
 
 1. Build the project
 
@@ -58,6 +73,7 @@ by an administrator from Grafana's UI `Configuration --> Datasources --> Add dat
 3. Point your browser to [localhost:3000](http://localhost:3000)
 
 
+    
 ## License
 
 > The MIT License (MIT)
