@@ -4,6 +4,10 @@
   "name": "splunk-datasource",
   "id": "efcasado-splunk-datasource",
   "metrics": true,
+  "alerting": true,
+  "backend": true,
+  "executable": "gpx_my-plugin",
+  "category": "tsdb",
   "info": {
     "description": "",
     "author": {

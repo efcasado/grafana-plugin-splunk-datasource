@@ -7,11 +7,14 @@ all: build up
 build: | build-docker build-splunk-datasource
 
 build-docker:
-	docker build . -t node
+	docker build . -t node -f Dockerfile.node
+	docker build . -t go -f Dockerfile.godev
 
 build-splunk-datasource:
 	yarn install
 	yarn build
+	go mod tidy
+	mage -v
 
 up:
 	docker-compose up -d
