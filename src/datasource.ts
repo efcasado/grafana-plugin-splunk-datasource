@@ -1,14 +1,15 @@
-import { getBackendSrv } from '@grafana/runtime';
+import { getBackendSrv, getTemplateSrv } from '@grafana/runtime';
 
 import {
   DataQueryRequest,
   DataQueryResponse,
   DataSourceApi,
   DataSourceInstanceSettings,
+  MetricFindValue,
   MutableDataFrame,
 } from '@grafana/data';
 
-import { SplunkQuery, SplunkDataSourceOptions } from './types';
+import { SplunkQuery, SplunkDataSourceOptions, defaultQueryRequestResults, QueryRequestResults } from './types';
 
 export class DataSource extends DataSourceApi<SplunkQuery, SplunkDataSourceOptions> {
   url?: string;
@@ -17,6 +18,19 @@ export class DataSource extends DataSourceApi<SplunkQuery, SplunkDataSourceOptio
     super(instanceSettings);
 
     this.url = instanceSettings.url;
+  }
+  async metricFindQuery(query: SplunkQuery, options: DataQueryRequest<SplunkQuery>): Promise<MetricFindValue[]> {
+    const promises: MetricFindValue[] = await this.doRequest(query, options).then((response: QueryRequestResults) => {
+      const frame: MetricFindValue[] = [];
+      response.results.forEach((result: any) => {
+        response.fields.forEach((field: string) => {
+          const f: MetricFindValue = { text: result[field] };
+          frame.push(f);
+        });
+      });
+      return frame;
+    });
+    return Promise.all(promises);
   }
 
   async query(options: DataQueryRequest<SplunkQuery>): Promise<DataQueryResponse> {
@@ -112,12 +126,18 @@ export class DataSource extends DataSourceApi<SplunkQuery, SplunkDataSourceOptio
   }
 
   async doSearchRequest(query: SplunkQuery, options: DataQueryRequest<SplunkQuery>) {
+    if ((query.queryText || '').trim().length < 4) {
+      return;
+    }
     const { range } = options;
     const from = Math.floor(range!.from.valueOf() / 1000);
     const to = Math.floor(range!.to.valueOf() / 1000);
 
+    const prefix = (query.queryText || ' ')[0].trim() === '|' ? '' : 'search';
+    const queryWithVars = getTemplateSrv().replace(`${prefix} ${query.queryText}`.trim(), options.scopedVars);
+
     const data = new URLSearchParams({
-      search: `search ${query.queryText}`,
+      search: queryWithVars,
       output_mode: 'json',
       earliest_time: from.toString(),
       latest_time: to.toString(),
@@ -190,13 +210,14 @@ export class DataSource extends DataSourceApi<SplunkQuery, SplunkDataSourceOptio
     return { fields: fields, results: results };
   }
 
-  async doRequest(query: SplunkQuery, options: DataQueryRequest<SplunkQuery>) {
-    const sid: string = await this.doSearchRequest(query, options);
+  async doRequest(query: SplunkQuery, options: DataQueryRequest<SplunkQuery>): Promise<QueryRequestResults> {
+    const sid: string = (await this.doSearchRequest(query, options)) || '';
     // console.log(`DEBUG: sid=${sid}`);
-
-    while (!(await this.doSearchStatusRequest(sid))) {}
-
-    const result = await this.doGetAllResultsRequest(sid);
-    return result;
+    if (sid.length > 0) {
+      while (!(await this.doSearchStatusRequest(sid))) {}
+      const result = await this.doGetAllResultsRequest(sid);
+      return result;
+    }
+    return defaultQueryRequestResults;
   }
 }
