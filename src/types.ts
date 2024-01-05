@@ -1,5 +1,15 @@
 import { DataQuery, DataSourceJsonData } from '@grafana/data';
 
+export interface QueryRequestResults {
+  fields: any[];
+  results: any[];
+}
+
+export const defaultQueryRequestResults: QueryRequestResults = {
+  fields: [],
+  results: [],
+};
+
 export interface SplunkQuery extends DataQuery {
   queryText: string;
 }
